@@ -41,6 +41,8 @@ def save_results(params_list, freeze_test_set=True):
     Run the model and save its responses and the rest of configs into a pickle file
     """
     result_tree = dict()
+    print ("param list")
+    print (params_list)
     for param_index, params in enumerate(params_list):
         print("\nExperiment name:", params['expr_name'])
 
@@ -235,8 +237,11 @@ def params_check(params):
     assert params['num_tokens_to_predict'] == 1
     # for classification, make sure that all of the class names are one word.
     for key, label_names in params['label_dict'].items():
+        print (key, label_names)
         for label_id, label_name in enumerate(label_names):
             first_token_of_label_name = complete(' ' + label_name, 1, params['model'], echo=True, num_log_probs=2)['choices'][0]['logprobs']['tokens'][0]
+            print ("first_token_of_label_name", first_token_of_label_name)
+            print ("label_name", label_name)
             if first_token_of_label_name[1:] != label_name:
                 print('label name is more than 1 token', label_name)
                 assert False

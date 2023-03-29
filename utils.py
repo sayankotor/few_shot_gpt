@@ -7,6 +7,7 @@ import torch
 import pickle
 import openai
 from transformers import GPT2Tokenizer, GPT2LMHeadModel
+from transformers import OPTForCausalLM, GPT2Tokenizer
 tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
 
 ROOT_DIR = os.path.dirname(os.path.realpath(__file__))
@@ -60,12 +61,23 @@ def setup_gpt2(model_name):
         gpt2_tokenizer.pad_token = gpt2_tokenizer.eos_token
         gpt2_model.config.pad_token_id = gpt2_model.config.eos_token_id
         print("Finished")
+        
+def setup_opt(model_name):
+    # load the opt model
+    global gpt2_model
+    global gpt2_tokenizer
+    if gpt2_model is None:
+        print("Setting up opt model")
+        model_name_or_path = "facebook/opt-1.3b"
 
-def setup_gpt3():
-    # get OpenAI access key
-    with open(os.path.join(ROOT_DIR, 'openai_key.txt'), 'r') as f:
-        key = f.readline().strip()
-        openai.api_key = key
+        gpt2_tokenizer = GPT2Tokenizer.from_pretrained(model_name)
+        gpt2_model = OPTForCausalLM.from_pretrained(model_name)
+        gpt2_model.eval().cuda()
+
+        gpt2_tokenizer.padding_side = "left"
+        gpt2_tokenizer.pad_token = gpt2_tokenizer.eos_token
+        gpt2_model.config.pad_token_id = gpt2_model.config.eos_token_id
+        print("Finished")
 
 def complete_gpt2(prompt, l=10, model_name='gpt2-xl', num_log_probs=None, echo=False):
     ''' This function runs GPT-2 locally but places the outputs into an json that looks just like the one
@@ -155,24 +167,93 @@ def complete_gpt2(prompt, l=10, model_name='gpt2-xl', num_log_probs=None, echo=F
     return_json['choices'] = choices
     return return_json
 
-def complete_gpt3(prompt, l, model_name, temp=0, num_log_probs=None, echo=False, n=None):
-    # call GPT-3 API until result is provided and then return it
-    response = None
-    received = False
-    while not received:
-        try:
-            response = openai.Completion.create(engine=model_name, prompt=prompt, max_tokens=l, temperature=temp,
-                                                logprobs=num_log_probs, echo=echo, stop='\n', n=n)
-            received = True
-        except:
-            error = sys.exc_info()[0]
-            if error == openai.error.InvalidRequestError: # something is wrong: e.g. prompt too long
-                print(f"InvalidRequestError\nPrompt passed in:\n\n{prompt}\n\n")
-                assert False
+def complete_opt(prompt, l=10, model_name='gpt2-xl', num_log_probs=None, echo=False):
+    ''' This function runs GPT-2 locally but places the outputs into an json that looks just like the one
+     provided by the OpenAI API. '''
+    if isinstance(prompt, str):
+        prompt = [prompt] # the code below assumes a list
+    input_ids = gpt2_tokenizer.batch_encode_plus(prompt, return_tensors="pt", padding=True)
+    
+    # greedily generate l tokens
+    if l > 0:
+        # the generate function can handle left padded inputs automatically in HF
+        # total_sequences is now the input + possible generated output
+        total_sequences = gpt2_model.generate(input_ids=input_ids['input_ids'].cuda(), attention_mask=input_ids['attention_mask'].cuda(), max_length=l + len(input_ids['input_ids'][0]), do_sample=False)
+    else:
+        assert echo == True and l == 0
+        total_sequences = input_ids['input_ids'].cuda()
 
-            print("API error:", error)
-            time.sleep(1)
-    return response
+    # they want the probs of the top tokens
+    if num_log_probs is not None:
+        # we are left padding, so we need to adjust the position IDs
+        attention_mask = (total_sequences != 50256).float()
+        position_ids = attention_mask.long().cumsum(-1) - 1
+        position_ids.masked_fill_(attention_mask == 0, 1)
+        # get the logits for the context and the next l tokens
+        logits = gpt2_model.forward(input_ids=total_sequences, attention_mask=attention_mask, return_dict=True).logits.detach().cpu()
+        if not echo:
+            # get the top tokens and probs for the generated l tokens
+            probs = torch.softmax(logits[:,-l-1:], dim=2).cpu()
+        else:
+            # get the top tokens and probs for the context and the generated l tokens
+            probs = torch.softmax(logits, dim=2).cpu()
+        top_probs, top_tokens = torch.topk(probs, k=num_log_probs)
+        logprobs = torch.log(probs)
+        top_log_probs = torch.log(top_probs)
+
+    # create the return value to resemble OpenAI
+    return_json = {}
+    choices = []
+    for batch_id in range(len(prompt)):
+        curr_json = {}
+        # text is just the optional context and next l tokens
+        if not echo:
+            curr_json['text'] = gpt2_tokenizer.decode(total_sequences[batch_id][-l:], skip_special_tokens=True)
+        else:
+            curr_json['text'] = gpt2_tokenizer.decode(total_sequences[batch_id], skip_special_tokens=True)
+
+        # fill the return json with the top tokens and probs to match the OpenAI return value.
+        if num_log_probs is not None:
+            curr_json['logprobs'] = {}
+            curr_json['logprobs']['top_logprobs'] = []
+            curr_json['logprobs']['token_logprobs'] = []
+            curr_json['logprobs']['tokens'] = []
+            if not echo:
+                # cutoff the -1 here because the probs are shifted one over for LMs
+                for current_element_top_log_probs, current_element_top_tokens in zip(top_log_probs[batch_id][:-1], top_tokens[batch_id][:-1]):
+                    # tokens is a list of the top token at each position
+                    curr_json['logprobs']['tokens'].append(gpt2_tokenizer.decode([current_element_top_tokens[0]]))
+                    # token_logprobs is a list of the logprob of the top token at each position
+                    curr_json['logprobs']['token_logprobs'].append(current_element_top_log_probs[0].item())
+                    # top_logprobs is a list of dicts for the top K tokens. with each entry being {'token_name': log_prob}
+                    temp = {}
+                    for log_prob, token in zip(current_element_top_log_probs, current_element_top_tokens):
+                        temp[gpt2_tokenizer.decode(token.item())] = log_prob.item()
+                    curr_json['logprobs']['top_logprobs'].append(temp)
+            else:
+                # same as not above but small tweaks
+                # we add null to the front because for the GPT models, they have null probability for the first token
+                # (for some reason they don't have an beginning of sentence token)
+                curr_json['logprobs']['top_logprobs'].append('null')
+                # cutoff the -1 here because the probs are shifted one over for LMs
+                for index, (current_element_top_log_probs, current_element_top_tokens) in enumerate(zip(top_log_probs[batch_id][:-1], top_tokens[batch_id][:-1])):
+                    # skip padding tokens
+                    if total_sequences[batch_id][index].item() == 50256:
+                        continue
+                    temp = {}
+                    for log_prob, token in zip(current_element_top_log_probs, current_element_top_tokens):
+                        temp[gpt2_tokenizer.decode(token.item())] = log_prob.item()
+                    curr_json['logprobs']['top_logprobs'].append(temp)
+                for index in range(len(probs[batch_id])):
+                    curr_json['logprobs']['tokens'].append(gpt2_tokenizer.decode([total_sequences[batch_id][index]]))
+                curr_json['logprobs']['token_logprobs'].append('null')
+                for index, log_probs_token_position_j in enumerate(logprobs[batch_id][:-1]):
+                    # probs are left shifted for LMs 
+                    curr_json['logprobs']['token_logprobs'].append(log_probs_token_position_j[total_sequences[batch_id][index+1]])
+
+        choices.append(curr_json)
+    return_json['choices'] = choices
+    return return_json
 
 def complete(prompt, l, model, temp=0, num_log_probs=None, echo=False, n=None):
     """complete the prompt using a language model"""
@@ -183,6 +264,9 @@ def complete(prompt, l, model, temp=0, num_log_probs=None, echo=False, n=None):
         assert temp == 0 # unsupported at the moment
         setup_gpt2(model)
         return complete_gpt2(prompt, l=l, model_name=model, num_log_probs=num_log_probs, echo=echo)
+    if 'opt' in model:
+        setup_opt(model)
+        return complete_opt(prompt, l=l, model_name=model, num_log_probs=num_log_probs, echo=echo)
     else:
         setup_gpt3()
         return complete_gpt3(prompt, l=l, model_name=model, num_log_probs=num_log_probs, echo=echo, n=n)

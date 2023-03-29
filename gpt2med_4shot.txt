@@ -1,0 +1,131 @@
+
+Experiment name: sst2_gpt2-large_0shot_None_subsample_seed0
+Setting up GPT-2 model
+Finished
+selecting full test set (1821 examples)
+getting raw resp for 1821 test sentences
+Missing probs: 2411/3642
+Accuracies: [0.7210323997803405, 0.8045030203185063]
+p_cf      : [0.17950527 0.8204947 ]
+Saved to /notebook/few-shot-learning/saved_results/sst2_gpt2-large_0shot_None_subsample_seed0.pkl
+
+Experiment name: sst2_gpt2-large_2shot_None_subsample_seed0
+selecting full test set (1821 examples)
+getting raw resp for 1821 test sentences
+Accuracies: [0.727622185612301, 0.5480505216913784]
+p_cf      : [0.584293   0.41570693]
+Saved to /notebook/few-shot-learning/saved_results/sst2_gpt2-large_2shot_None_subsample_seed0.pkl
+
+Experiment name: sst2_gpt2-large_4shot_None_subsample_seed0
+selecting full test set (1821 examples)
+getting raw resp for 1821 test sentences
+Accuracies: [0.5238879736408567, 0.6721581548599671]
+p_cf      : [0.3622655  0.63773453]
+Saved to /notebook/few-shot-learning/saved_results/sst2_gpt2-large_4shot_None_subsample_seed0.pkl
+
+Experiment name: agnews_gpt2-large_0shot_None_subsample_seed0
+selecting full test set (7600 examples)
+getting raw resp for 7600 test sentences
+Missing probs: 21371/30400
+Accuracies: [0.3730263157894737, 0.6032894736842105]
+p_cf      : [0.575813   0.19529809 0.1578651  0.07102384]
+Saved to /notebook/few-shot-learning/saved_results/agnews_gpt2-large_0shot_None_subsample_seed0.pkl
+
+Experiment name: agnews_gpt2-large_2shot_None_subsample_seed0
+selecting full test set (7600 examples)
+getting raw resp for 7600 test sentences
+Missing probs: 7734/30400
+Accuracies: [0.25, 0.6478947368421053]
+p_cf      : [0.00181882 0.00122361 0.02889167 0.9680659 ]
+Saved to /notebook/few-shot-learning/saved_results/agnews_gpt2-large_2shot_None_subsample_seed0.pkl
+
+Experiment name: agnews_gpt2-large_4shot_None_subsample_seed0
+selecting full test set (7600 examples)
+getting raw resp for 7600 test sentences
+Missing probs: 4423/30400
+Accuracies: [0.2743421052631579, 0.49605263157894736]
+p_cf      : [0.15722409 0.00136886 0.02025273 0.82115436]
+Saved to /notebook/few-shot-learning/saved_results/agnews_gpt2-large_4shot_None_subsample_seed0.pkl
+
+Experiment name: trec_gpt2-large_0shot_None_subsample_seed0
+selecting full test set (500 examples)
+getting raw resp for 500 test sentences
+Missing probs: 68/3000
+Accuracies: [0.346, 0.32]
+p_cf      : [0.70703614 0.10097232 0.01778629 0.02187191 0.04036525 0.11196799]
+Saved to /notebook/few-shot-learning/saved_results/trec_gpt2-large_0shot_None_subsample_seed0.pkl
+
+Experiment name: trec_gpt2-large_2shot_None_subsample_seed0
+selecting full test set (500 examples)
+getting raw resp for 500 test sentences
+Accuracies: [0.352, 0.398]
+p_cf      : [0.29233027 0.14989457 0.05829355 0.01850327 0.09978903 0.38118932]
+Saved to /notebook/few-shot-learning/saved_results/trec_gpt2-large_2shot_None_subsample_seed0.pkl
+
+Experiment name: trec_gpt2-large_4shot_None_subsample_seed0
+selecting full test set (500 examples)
+getting raw resp for 500 test sentences
+Missing probs: 7/3000
+Accuracies: [0.338, 0.338]
+p_cf      : [0.17870168 0.14176416 0.08666291 0.00847689 0.10784663 0.47654772]
+Saved to /notebook/few-shot-learning/saved_results/trec_gpt2-large_4shot_None_subsample_seed0.pkl
+
+
+Dataset: sst2
+
+Model: gpt2-large
+
+0-shot, 1 seeds
+Original Accuracy   | Mean: 0.7210, Low: 0.7210, High: 0.7210, Std: 0.0000
+Calibrated Accuracy | Mean: 0.8045, Low: 0.8045, High: 0.8045, Std: 0.0000
+
+
+2-shot, 1 seeds
+Original Accuracy   | Mean: 0.7276, Low: 0.7276, High: 0.7276, Std: 0.0000
+Calibrated Accuracy | Mean: 0.5481, Low: 0.5481, High: 0.5481, Std: 0.0000
+
+
+4-shot, 1 seeds
+Original Accuracy   | Mean: 0.5239, Low: 0.5239, High: 0.5239, Std: 0.0000
+Calibrated Accuracy | Mean: 0.6722, Low: 0.6722, High: 0.6722, Std: 0.0000
+
+
+
+Dataset: agnews
+
+Model: gpt2-large
+
+0-shot, 1 seeds
+Original Accuracy   | Mean: 0.3730, Low: 0.3730, High: 0.3730, Std: 0.0000
+Calibrated Accuracy | Mean: 0.6033, Low: 0.6033, High: 0.6033, Std: 0.0000
+
+
+2-shot, 1 seeds
+Original Accuracy   | Mean: 0.2500, Low: 0.2500, High: 0.2500, Std: 0.0000
+Calibrated Accuracy | Mean: 0.6479, Low: 0.6479, High: 0.6479, Std: 0.0000
+
+
+4-shot, 1 seeds
+Original Accuracy   | Mean: 0.2743, Low: 0.2743, High: 0.2743, Std: 0.0000
+Calibrated Accuracy | Mean: 0.4961, Low: 0.4961, High: 0.4961, Std: 0.0000
+
+
+
+Dataset: trec
+
+Model: gpt2-large
+
+0-shot, 1 seeds
+Original Accuracy   | Mean: 0.3460, Low: 0.3460, High: 0.3460, Std: 0.0000
+Calibrated Accuracy | Mean: 0.3200, Low: 0.3200, High: 0.3200, Std: 0.0000
+
+
+2-shot, 1 seeds
+Original Accuracy   | Mean: 0.3520, Low: 0.3520, High: 0.3520, Std: 0.0000
+Calibrated Accuracy | Mean: 0.3980, Low: 0.3980, High: 0.3980, Std: 0.0000
+
+
+4-shot, 1 seeds
+Original Accuracy   | Mean: 0.3380, Low: 0.3380, High: 0.3380, Std: 0.0000
+Calibrated Accuracy | Mean: 0.3380, Low: 0.3380, High: 0.3380, Std: 0.0000
+

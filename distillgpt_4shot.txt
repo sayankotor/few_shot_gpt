@@ -1,0 +1,169 @@
+
+Experiment name: sst2_distilgpt2_0shot_None_subsample_seed0
+0 ['Negative']
+Setting up GPT-2 model
+Finished
+1 ['Positive']
+selecting full test set (1821 examples)
+getting raw resp for 1821 test sentences
+Missing probs: 3491/3642
+Accuracies: [0.6512904997254256, 0.6518396485447556]
+p_cf      : [0.56132615 0.43867385]
+Saved to /notebook/few-shot-learning/saved_results/sst2_distilgpt2_0shot_None_subsample_seed0.pkl
+
+Experiment name: sst2_distilgpt2_2shot_None_subsample_seed0
+0 ['Negative']
+1 ['Positive']
+selecting full test set (1821 examples)
+getting raw resp for 1821 test sentences
+Missing probs: 19/3642
+Accuracies: [0.49807797913234486, 0.499725425590335]
+p_cf      : [0.6382841 0.3617159]
+Saved to /notebook/few-shot-learning/saved_results/sst2_distilgpt2_2shot_None_subsample_seed0.pkl
+
+Experiment name: sst2_distilgpt2_4shot_None_subsample_seed0
+0 ['Negative']
+1 ['Positive']
+selecting full test set (1821 examples)
+getting raw resp for 1821 test sentences
+Accuracies: [0.5019220208676551, 0.5557386051619989]
+p_cf      : [0.66890454 0.33109543]
+Saved to /notebook/few-shot-learning/saved_results/sst2_distilgpt2_4shot_None_subsample_seed0.pkl
+
+Experiment name: agnews_distilgpt2_0shot_None_subsample_seed0
+0 ['World']
+1 ['Sports']
+2 ['Business']
+3 ['Technology', 'Science']
+selecting full test set (7600 examples)
+getting raw resp for 7600 test sentences
+Missing probs: 28867/30400
+Accuracies: [0.5955263157894737, 0.6175]
+p_cf      : [0.6297396  0.08711564 0.07645176 0.20669301]
+Saved to /notebook/few-shot-learning/saved_results/agnews_distilgpt2_0shot_None_subsample_seed0.pkl
+
+Experiment name: agnews_distilgpt2_2shot_None_subsample_seed0
+0 ['World']
+1 ['Sports']
+2 ['Business']
+3 ['Technology', 'Science']
+selecting full test set (7600 examples)
+getting raw resp for 7600 test sentences
+Missing probs: 7727/30400
+Accuracies: [0.25, 0.3667105263157895]
+p_cf      : [0.01340187 0.00238422 0.04861224 0.93560165]
+Saved to /notebook/few-shot-learning/saved_results/agnews_distilgpt2_2shot_None_subsample_seed0.pkl
+
+Experiment name: agnews_distilgpt2_4shot_None_subsample_seed0
+0 ['World']
+1 ['Sports']
+2 ['Business']
+3 ['Technology', 'Science']
+selecting full test set (7600 examples)
+getting raw resp for 7600 test sentences
+Missing probs: 4801/30400
+Accuracies: [0.2501315789473684, 0.3243421052631579]
+p_cf      : [0.2557268  0.00311216 0.0181077  0.72305334]
+Saved to /notebook/few-shot-learning/saved_results/agnews_distilgpt2_4shot_None_subsample_seed0.pkl
+
+Experiment name: trec_distilgpt2_0shot_None_subsample_seed0
+0 ['Number']
+1 ['Location']
+2 ['Person']
+3 ['Description']
+4 ['Entity']
+5 ['Ab']
+selecting full test set (500 examples)
+getting raw resp for 500 test sentences
+Missing probs: 1454/3000
+Accuracies: [0.312, 0.284]
+p_cf      : [0.6005437  0.06159581 0.08785658 0.13994698 0.03245158 0.07760531]
+Saved to /notebook/few-shot-learning/saved_results/trec_distilgpt2_0shot_None_subsample_seed0.pkl
+
+Experiment name: trec_distilgpt2_2shot_None_subsample_seed0
+0 ['Number']
+1 ['Location']
+2 ['Person']
+3 ['Description']
+4 ['Entity']
+5 ['Ab']
+selecting full test set (500 examples)
+getting raw resp for 500 test sentences
+Missing probs: 144/3000
+Accuracies: [0.322, 0.384]
+p_cf      : [0.4996931  0.01738976 0.06396496 0.00404893 0.40523663 0.00966661]
+Saved to /notebook/few-shot-learning/saved_results/trec_distilgpt2_2shot_None_subsample_seed0.pkl
+
+Experiment name: trec_distilgpt2_4shot_None_subsample_seed0
+0 ['Number']
+1 ['Location']
+2 ['Person']
+3 ['Description']
+4 ['Entity']
+5 ['Ab']
+selecting full test set (500 examples)
+getting raw resp for 500 test sentences
+Missing probs: 29/3000
+Accuracies: [0.13, 0.288]
+p_cf      : [0.02577806 0.27168867 0.65520084 0.00321129 0.03875075 0.00537038]
+Saved to /notebook/few-shot-learning/saved_results/trec_distilgpt2_4shot_None_subsample_seed0.pkl
+
+
+Dataset: sst2
+
+Model: distilgpt2
+
+0-shot, 1 seeds
+Original Accuracy   | Mean: 0.6513, Low: 0.6513, High: 0.6513, Std: 0.0000
+Calibrated Accuracy | Mean: 0.6518, Low: 0.6518, High: 0.6518, Std: 0.0000
+
+
+2-shot, 1 seeds
+Original Accuracy   | Mean: 0.4981, Low: 0.4981, High: 0.4981, Std: 0.0000
+Calibrated Accuracy | Mean: 0.4997, Low: 0.4997, High: 0.4997, Std: 0.0000
+
+
+4-shot, 1 seeds
+Original Accuracy   | Mean: 0.5019, Low: 0.5019, High: 0.5019, Std: 0.0000
+Calibrated Accuracy | Mean: 0.5557, Low: 0.5557, High: 0.5557, Std: 0.0000
+
+
+
+Dataset: agnews
+
+Model: distilgpt2
+
+0-shot, 1 seeds
+Original Accuracy   | Mean: 0.5955, Low: 0.5955, High: 0.5955, Std: 0.0000
+Calibrated Accuracy | Mean: 0.6175, Low: 0.6175, High: 0.6175, Std: 0.0000
+
+
+2-shot, 1 seeds
+Original Accuracy   | Mean: 0.2500, Low: 0.2500, High: 0.2500, Std: 0.0000
+Calibrated Accuracy | Mean: 0.3667, Low: 0.3667, High: 0.3667, Std: 0.0000
+
+
+4-shot, 1 seeds
+Original Accuracy   | Mean: 0.2501, Low: 0.2501, High: 0.2501, Std: 0.0000
+Calibrated Accuracy | Mean: 0.3243, Low: 0.3243, High: 0.3243, Std: 0.0000
+
+
+
+Dataset: trec
+
+Model: distilgpt2
+
+0-shot, 1 seeds
+Original Accuracy   | Mean: 0.3120, Low: 0.3120, High: 0.3120, Std: 0.0000
+Calibrated Accuracy | Mean: 0.2840, Low: 0.2840, High: 0.2840, Std: 0.0000
+
+
+2-shot, 1 seeds
+Original Accuracy   | Mean: 0.3220, Low: 0.3220, High: 0.3220, Std: 0.0000
+Calibrated Accuracy | Mean: 0.3840, Low: 0.3840, High: 0.3840, Std: 0.0000
+
+
+4-shot, 1 seeds
+Original Accuracy   | Mean: 0.1300, Low: 0.1300, High: 0.1300, Std: 0.0000
+Calibrated Accuracy | Mean: 0.2880, Low: 0.2880, High: 0.2880, Std: 0.0000
+

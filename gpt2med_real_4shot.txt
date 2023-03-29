@@ -1,0 +1,256 @@
+param list
+[{'conditioned_on_correct_classes': True, 'subsample_test_set': None, 'api_num_log_prob': 100, 'approx': False, 'bs': None, 'model': 'gpt2-medium', 'dataset': 'sst2', 'seed': 0, 'num_shots': 0, 'expr_name': 'sst2_gpt2-medium_0shot_None_subsample_seed0'}, {'conditioned_on_correct_classes': True, 'subsample_test_set': None, 'api_num_log_prob': 100, 'approx': False, 'bs': None, 'model': 'gpt2-medium', 'dataset': 'sst2', 'seed': 0, 'num_shots': 2, 'expr_name': 'sst2_gpt2-medium_2shot_None_subsample_seed0'}, {'conditioned_on_correct_classes': True, 'subsample_test_set': None, 'api_num_log_prob': 100, 'approx': False, 'bs': None, 'model': 'gpt2-medium', 'dataset': 'sst2', 'seed': 0, 'num_shots': 4, 'expr_name': 'sst2_gpt2-medium_4shot_None_subsample_seed0'}, {'conditioned_on_correct_classes': True, 'subsample_test_set': None, 'api_num_log_prob': 100, 'approx': False, 'bs': None, 'model': 'gpt2-medium', 'dataset': 'trec', 'seed': 0, 'num_shots': 0, 'expr_name': 'trec_gpt2-medium_0shot_None_subsample_seed0'}, {'conditioned_on_correct_classes': True, 'subsample_test_set': None, 'api_num_log_prob': 100, 'approx': False, 'bs': None, 'model': 'gpt2-medium', 'dataset': 'trec', 'seed': 0, 'num_shots': 2, 'expr_name': 'trec_gpt2-medium_2shot_None_subsample_seed0'}, {'conditioned_on_correct_classes': True, 'subsample_test_set': None, 'api_num_log_prob': 100, 'approx': False, 'bs': None, 'model': 'gpt2-medium', 'dataset': 'trec', 'seed': 0, 'num_shots': 4, 'expr_name': 'trec_gpt2-medium_4shot_None_subsample_seed0'}, {'conditioned_on_correct_classes': True, 'subsample_test_set': None, 'api_num_log_prob': 100, 'approx': False, 'bs': None, 'model': 'gpt2-medium', 'dataset': 'agnews', 'seed': 0, 'num_shots': 0, 'expr_name': 'agnews_gpt2-medium_0shot_None_subsample_seed0'}, {'conditioned_on_correct_classes': True, 'subsample_test_set': None, 'api_num_log_prob': 100, 'approx': False, 'bs': None, 'model': 'gpt2-medium', 'dataset': 'agnews', 'seed': 0, 'num_shots': 2, 'expr_name': 'agnews_gpt2-medium_2shot_None_subsample_seed0'}, {'conditioned_on_correct_classes': True, 'subsample_test_set': None, 'api_num_log_prob': 100, 'approx': False, 'bs': None, 'model': 'gpt2-medium', 'dataset': 'agnews', 'seed': 0, 'num_shots': 4, 'expr_name': 'agnews_gpt2-medium_4shot_None_subsample_seed0'}]
+
+Experiment name: sst2_gpt2-medium_0shot_None_subsample_seed0
+0 ['Negative']
+Setting up GPT-2 model
+Finished
+first_token_of_label_name  Negative
+label_name Negative
+1 ['Positive']
+first_token_of_label_name  Positive
+label_name Positive
+selecting full test set (1821 examples)
+getting raw resp for 1821 test sentences
+Missing probs: 2744/3642
+Accuracies: [0.5996705107084019, 0.7951674903898956]
+p_cf      : [0.24002932 0.75997066]
+WARNING! overwriting existing saved files
+Saved to /notebook/few-shot-learning/saved_results/sst2_gpt2-medium_0shot_None_subsample_seed0.pkl
+
+Experiment name: sst2_gpt2-medium_2shot_None_subsample_seed0
+0 ['Negative']
+first_token_of_label_name  Negative
+label_name Negative
+1 ['Positive']
+first_token_of_label_name  Positive
+label_name Positive
+selecting full test set (1821 examples)
+getting raw resp for 1821 test sentences
+Accuracies: [0.6688632619439868, 0.6018671059857221]
+p_cf      : [0.5286992  0.47130075]
+WARNING! overwriting existing saved files
+Saved to /notebook/few-shot-learning/saved_results/sst2_gpt2-medium_2shot_None_subsample_seed0.pkl
+
+Experiment name: sst2_gpt2-medium_4shot_None_subsample_seed0
+0 ['Negative']
+first_token_of_label_name  Negative
+label_name Negative
+1 ['Positive']
+first_token_of_label_name  Positive
+label_name Positive
+selecting full test set (1821 examples)
+getting raw resp for 1821 test sentences
+Accuracies: [0.5041186161449753, 0.5019220208676551]
+p_cf      : [0.4706207 0.5293793]
+WARNING! overwriting existing saved files
+Saved to /notebook/few-shot-learning/saved_results/sst2_gpt2-medium_4shot_None_subsample_seed0.pkl
+
+Experiment name: trec_gpt2-medium_0shot_None_subsample_seed0
+0 ['Number']
+first_token_of_label_name  Number
+label_name Number
+1 ['Location']
+first_token_of_label_name  Location
+label_name Location
+2 ['Person']
+first_token_of_label_name  Person
+label_name Person
+3 ['Description']
+first_token_of_label_name  Description
+label_name Description
+4 ['Entity']
+first_token_of_label_name  Entity
+label_name Entity
+5 ['Ab']
+first_token_of_label_name  Ab
+label_name Ab
+selecting full test set (500 examples)
+getting raw resp for 500 test sentences
+Missing probs: 5/3000
+Accuracies: [0.292, 0.388]
+p_cf      : [0.5675628  0.28094834 0.09884245 0.02991457 0.01381748 0.00891431]
+WARNING! overwriting existing saved files
+Saved to /notebook/few-shot-learning/saved_results/trec_gpt2-medium_0shot_None_subsample_seed0.pkl
+
+Experiment name: trec_gpt2-medium_2shot_None_subsample_seed0
+0 ['Number']
+first_token_of_label_name  Number
+label_name Number
+1 ['Location']
+first_token_of_label_name  Location
+label_name Location
+2 ['Person']
+first_token_of_label_name  Person
+label_name Person
+3 ['Description']
+first_token_of_label_name  Description
+label_name Description
+4 ['Entity']
+first_token_of_label_name  Entity
+label_name Entity
+5 ['Ab']
+first_token_of_label_name  Ab
+label_name Ab
+selecting full test set (500 examples)
+getting raw resp for 500 test sentences
+Accuracies: [0.274, 0.386]
+p_cf      : [0.06687754 0.29057592 0.51987255 0.04418153 0.03829339 0.04019901]
+WARNING! overwriting existing saved files
+Saved to /notebook/few-shot-learning/saved_results/trec_gpt2-medium_2shot_None_subsample_seed0.pkl
+
+Experiment name: trec_gpt2-medium_4shot_None_subsample_seed0
+0 ['Number']
+first_token_of_label_name  Number
+label_name Number
+1 ['Location']
+first_token_of_label_name  Location
+label_name Location
+2 ['Person']
+first_token_of_label_name  Person
+label_name Person
+3 ['Description']
+first_token_of_label_name  Description
+label_name Description
+4 ['Entity']
+first_token_of_label_name  Entity
+label_name Entity
+5 ['Ab']
+first_token_of_label_name  Ab
+label_name Ab
+selecting full test set (500 examples)
+getting raw resp for 500 test sentences
+Missing probs: 1/3000
+Accuracies: [0.188, 0.378]
+p_cf      : [0.04076498 0.47880936 0.17600708 0.03728685 0.14113934 0.12599234]
+WARNING! overwriting existing saved files
+Saved to /notebook/few-shot-learning/saved_results/trec_gpt2-medium_4shot_None_subsample_seed0.pkl
+
+Experiment name: agnews_gpt2-medium_0shot_None_subsample_seed0
+0 ['World']
+first_token_of_label_name  World
+label_name World
+1 ['Sports']
+first_token_of_label_name  Sports
+label_name Sports
+2 ['Business']
+first_token_of_label_name  Business
+label_name Business
+3 ['Technology', 'Science']
+first_token_of_label_name  Technology
+label_name Technology
+first_token_of_label_name  Science
+label_name Science
+selecting full test set (7600 examples)
+getting raw resp for 7600 test sentences
+Missing probs: 17655/30400
+Accuracies: [0.33789473684210525, 0.6655263157894736]
+p_cf      : [0.84514743 0.08580621 0.03797828 0.03106806]
+WARNING! overwriting existing saved files
+Saved to /notebook/few-shot-learning/saved_results/agnews_gpt2-medium_0shot_None_subsample_seed0.pkl
+
+Experiment name: agnews_gpt2-medium_2shot_None_subsample_seed0
+0 ['World']
+first_token_of_label_name  World
+label_name World
+1 ['Sports']
+first_token_of_label_name  Sports
+label_name Sports
+2 ['Business']
+first_token_of_label_name  Business
+label_name Business
+3 ['Technology', 'Science']
+first_token_of_label_name  Technology
+label_name Technology
+first_token_of_label_name  Science
+label_name Science
+selecting full test set (7600 examples)
+getting raw resp for 7600 test sentences
+Missing probs: 3546/30400
+Accuracies: [0.2532894736842105, 0.6323684210526316]
+p_cf      : [0.01350488 0.01622535 0.09119283 0.8790769 ]
+WARNING! overwriting existing saved files
+Saved to /notebook/few-shot-learning/saved_results/agnews_gpt2-medium_2shot_None_subsample_seed0.pkl
+
+Experiment name: agnews_gpt2-medium_4shot_None_subsample_seed0
+0 ['World']
+first_token_of_label_name  World
+label_name World
+1 ['Sports']
+first_token_of_label_name  Sports
+label_name Sports
+2 ['Business']
+first_token_of_label_name  Business
+label_name Business
+3 ['Technology', 'Science']
+first_token_of_label_name  Technology
+label_name Technology
+first_token_of_label_name  Science
+label_name Science
+selecting full test set (7600 examples)
+getting raw resp for 7600 test sentences
+Missing probs: 59/30400
+Accuracies: [0.41289473684210526, 0.5948684210526316]
+p_cf      : [0.5599116  0.03083313 0.09112711 0.31812814]
+WARNING! overwriting existing saved files
+Saved to /notebook/few-shot-learning/saved_results/agnews_gpt2-medium_4shot_None_subsample_seed0.pkl
+
+
+Dataset: sst2
+
+Model: gpt2-medium
+
+0-shot, 1 seeds
+Original Accuracy   | Mean: 0.5997, Low: 0.5997, High: 0.5997, Std: 0.0000
+Calibrated Accuracy | Mean: 0.7952, Low: 0.7952, High: 0.7952, Std: 0.0000
+
+
+2-shot, 1 seeds
+Original Accuracy   | Mean: 0.6689, Low: 0.6689, High: 0.6689, Std: 0.0000
+Calibrated Accuracy | Mean: 0.6019, Low: 0.6019, High: 0.6019, Std: 0.0000
+
+
+4-shot, 1 seeds
+Original Accuracy   | Mean: 0.5041, Low: 0.5041, High: 0.5041, Std: 0.0000
+Calibrated Accuracy | Mean: 0.5019, Low: 0.5019, High: 0.5019, Std: 0.0000
+
+
+
+Dataset: trec
+
+Model: gpt2-medium
+
+0-shot, 1 seeds
+Original Accuracy   | Mean: 0.2920, Low: 0.2920, High: 0.2920, Std: 0.0000
+Calibrated Accuracy | Mean: 0.3880, Low: 0.3880, High: 0.3880, Std: 0.0000
+
+
+2-shot, 1 seeds
+Original Accuracy   | Mean: 0.2740, Low: 0.2740, High: 0.2740, Std: 0.0000
+Calibrated Accuracy | Mean: 0.3860, Low: 0.3860, High: 0.3860, Std: 0.0000
+
+
+4-shot, 1 seeds
+Original Accuracy   | Mean: 0.1880, Low: 0.1880, High: 0.1880, Std: 0.0000
+Calibrated Accuracy | Mean: 0.3780, Low: 0.3780, High: 0.3780, Std: 0.0000
+
+
+
+Dataset: agnews
+
+Model: gpt2-medium
+
+0-shot, 1 seeds
+Original Accuracy   | Mean: 0.3379, Low: 0.3379, High: 0.3379, Std: 0.0000
+Calibrated Accuracy | Mean: 0.6655, Low: 0.6655, High: 0.6655, Std: 0.0000
+
+
+2-shot, 1 seeds
+Original Accuracy   | Mean: 0.2533, Low: 0.2533, High: 0.2533, Std: 0.0000
+Calibrated Accuracy | Mean: 0.6324, Low: 0.6324, High: 0.6324, Std: 0.0000
+
+
+4-shot, 1 seeds
+Original Accuracy   | Mean: 0.4129, Low: 0.4129, High: 0.4129, Std: 0.0000
+Calibrated Accuracy | Mean: 0.5949, Low: 0.5949, High: 0.5949, Std: 0.0000
+
